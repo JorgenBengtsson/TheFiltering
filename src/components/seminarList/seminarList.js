@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./seminarList.css"
+
 import SeminarItem from "./seminarItem/seminarItem";
 import SearchField from "./searchField/searchField";
 import CategorySelection from "./categorySelection/categorySelection";
@@ -42,6 +44,7 @@ export default class SeminarList extends Component {
   render() {
     return (
       <div>
+				<div className="header">
         <SearchField
           handleSearchChange={(text) => {
             this.setState({ filterText: text }, () => this.filter());
@@ -52,13 +55,14 @@ export default class SeminarList extends Component {
             this.setState({ filterCategories: categories }, () => this.filter())
           }
         />
+				</div>
         {this.state.filteredData.map((item) => (
           <SeminarItem
-            key={item.id}
+						key={item.id}
+						id={item.id}
             name={item.name}
-            category={item.category}
-            desc={item.desc}
-            date={item.date}
+						date={item.date}
+						handleOnClick={(id) => this.props.handleSeminarSelect(id)}
           />
         ))}
       </div>
